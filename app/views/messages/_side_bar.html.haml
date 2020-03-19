@@ -4,15 +4,17 @@
       = current_user.name
     .header__lists
       .list
-        = link_to '#' do
+        = link_to new_group_path do
           = icon('fa', 'edit',class: 'icon')
       .list
         = link_to edit_user_path(current_user) do
           = icon('fa', 'cog',class: 'icon')
 
   .groups
-    .group
-      .group__name
-        グループ名
-      .group__message
-        tesuto
+    - current_user.groups.each do |g|
+      .group
+        = link_to "#" do
+          .group__name
+            = g.name
+          .group__message
+            tesuto
