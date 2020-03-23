@@ -13,8 +13,8 @@
   .groups
     - current_user.groups.each do |g|
       .group
-        = link_to "#" do
+        = link_to group_messages_path(g) do
           .group__name
             = g.name
           .group__message
-            tesuto
+            = g.show_last_message

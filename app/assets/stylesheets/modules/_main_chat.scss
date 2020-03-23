@@ -16,12 +16,8 @@
         display: flex;
         font-size: $main_header_member;
         margin-top: 15px;
-
-        .member {
-          display: inline-block;
-          padding-right: 5px;
-        }
-
+        display: inline-block;
+        padding-right: 5px;
       }
 
     }
@@ -35,8 +31,11 @@
       margin-top: 29px;
       margin-bottom: 29px;
       padding: 0 20px;
+      .edit-btn{
+        color: $light_blue;
+        text-decoration: none;
+      }
     }
-
   }
 
   &__messages{
@@ -57,6 +56,31 @@
       word-break: break-all;
       border-radius: 10px;
       clear: both;
+
+      .upper-message{
+        display: flex;
+        &__user-name{
+          color: #333333;
+          font-size: 16px;
+        }
+
+        &__date{
+          color: #999999;
+          font-size: 12px;
+          margin-left: 12px;
+        }
+
+      }
+
+      .lower-message{
+        margin-top: 12px;
+        color: #434A54;
+        font-size: 14px;
+        &__image{
+
+        }
+        
+      }
     }
 
     /* beforeで枠線の三角を表現 */

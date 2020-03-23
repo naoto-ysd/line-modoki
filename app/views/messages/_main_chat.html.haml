@@ -2,45 +2,20 @@
   .main__header
     .left-header
       .left-header__title
-        グループ名
+        = @group.name
       .left-header__members
-        Member:
-        .member
-          yoshida
-        .member
-          naoto
+        ="Member: " + @group.users.pluck(:name).join(" ")
     .right-header
-      .right-header__button
-        Edit
-
+      = link_to "Edit", edit_group_path(@group.id) , class: "edit-btn"
 
   .main__messages
-    .main__messages__OtherUser
-      こんにちはaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-    .main__messages__CurrentUser
-      おはようuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-
-    .main__messages__OtherUser
-      こんにちはaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-    .main__messages__CurrentUser
-      おはようuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-    .main__messages__OtherUser
-      こんにちはaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
-    .main__messages__CurrentUser
-      おはようuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-    .main__messages__OtherUser
-      こんにちはaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    .main__messages__OtherUser
-      こんにちはaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    = render partial: 'message', collection: @messages
 
   .form
-    %form
-      %input.form__message
+    = form_for [@group, @message] do |f|
+      = f.text_field :content, class: 'form__message', placeholder: 'type a message'
       .form__mask
-        %label.form__mask__image
-          = icon('fa','image',class: 'icon')
-          %input.hidden{type: 'file'}
-      %input.form__submit{type: 'submit', value: 'Send'}
+        = f.label :image, class: 'form__mask__image' do
+          = icon('fas', 'image', class: 'icon')
+          = f.file_field :image, class: 'hidden'
+      = f.submit 'Send', class: 'form__submit'
