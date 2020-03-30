@@ -9,7 +9,7 @@
       = link_to "Edit", edit_group_path(@group.id) , class: "edit-btn"
 
   .main__messages
-    = render partial: 'message', collection: @messages
+    = render @messages
 
   .form
     = form_for [@group, @message] do |f|

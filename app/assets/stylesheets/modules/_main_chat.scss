@@ -55,17 +55,18 @@
       //最大文字数を超えたら改行
       word-break: break-all;
       border-radius: 10px;
+      float: left;
       clear: both;
 
       .upper-message{
         display: flex;
         &__user-name{
-          color: #333333;
+          color: $message_color;
           font-size: 16px;
         }
 
         &__date{
-          color: #999999;
+          color: $message_color;
           font-size: 12px;
           margin-left: 12px;
         }
@@ -118,13 +119,39 @@
       background-color: #00B900;
       margin: 20px;
       min-height: 60px;
-      width: 100vw;
+      // width: 100vw;
+      width: 500px;
       max-width: 40%;
       //最大文字数を超えたら改行
       word-break: break-all;
       border-radius: 10px;
       float: right;
       clear: both;
+
+      .upper-message{
+        display: flex;
+        &__user-name{
+          color: $message_color;
+          font-size: 16px;
+        }
+
+        &__date{
+          color: $message_color;
+          font-size: 12px;
+          margin-left: 12px;
+        }
+
+      }
+
+      .lower-message{
+        margin-top: 12px;
+        color: $message_color;
+        font-size: 14px;
+        &__image{
+
+        }
+        
+      }
     }
 
     /* beforeで枠線の三角を表現 */
