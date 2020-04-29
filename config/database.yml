@@ -49,6 +49,9 @@ test:
 #
 production:
   <<: *default
-  database: line-modoki_production
-  username: line-modoki
-  password: <%= ENV['LINE-MODOKI_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  # database: line-modoki_production
+  # username: line-modoki
+  # password: <%= ENV['LINE-MODOKI_DATABASE_PASSWORD'] %>
