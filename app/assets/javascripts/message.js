@@ -1,6 +1,6 @@
 $(function(){
   //カスタムデータ属性を利用し、ログインしているユーザーのIDを取得
-  let current_user = $('.header__name').data("current-user");
+  let current_user_ID = $('.header__name').data("current-user");
   let last_message_id = ""
   let last_message_id_current = ""
   let last_message_id_other = ""
@@ -22,9 +22,9 @@ $(function(){
     }      
   }
 
-  function buildHTML(message, current_user, message_user_id){
+  function buildHTML(message, current_user_ID, message_user_id){
     let html_baloon = ""
-    if (message_user_id == current_user) {
+    if (message_user_id == current_user_ID) {
       html_baloon = 
         `<div class="main__messages__CurrentUser" data-message-id=${message.id} >`
     } else {
@@ -85,7 +85,7 @@ $(function(){
       //そのため、メッセージの新規投稿ではbuildHTMLの引数は第2引数と第3引数に同じ値を設定している
       //なお、reloadMessages内で呼び出しているbuildHTMLについては
       //メッセージごとにメッセージに紐づくユーザーIDを取り出してbuildHTMLに渡している。
-      let html = buildHTML(data, current_user, current_user);
+      let html = buildHTML(data, current_user_ID, current_user_ID);
         $('.main__messages').append(html);
         $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight});
         $('form')[0].reset();
@@ -113,7 +113,7 @@ $(function(){
       if (messages.length !== 0) {
         let insertHTML = '';
         $.each(messages, function(i,message) {
-          insertHTML += buildHTML(message, current_user, message.user_id)
+          insertHTML += buildHTML(message, current_user_ID, message.user_id)
         });
         $('.main__messages').append(insertHTML);
         $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight});
