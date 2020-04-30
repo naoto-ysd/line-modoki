@@ -1,9 +1,9 @@
 $(function(){
   //カスタムデータ属性を利用し、ログインしているユーザーのIDを取得
   let current_user_ID = $('.header__name').data("current-user");
-  let last_message_id = ""
-  let last_message_id_current = ""
-  let last_message_id_other = ""
+  let last_message_id = 0
+  let last_message_id_current = 0
+  let last_message_id_other = 0
 
   function last_message_setter(){
     //自動更新するときは最新のメッセージをテーブルから取得する
@@ -11,6 +11,7 @@ $(function(){
     //main__messages__OtherUserの最新メッセージを比較して大きい方をlast_message_idとしている。
     last_message_id_current = $('.main__messages__CurrentUser:last').data("message-id");
     last_message_id_other = $('.main__messages__OtherUser:last').data("message-id");
+
     if (last_message_id_current > last_message_id_other){
       last_message_id = last_message_id_current
     } else{
@@ -19,7 +20,7 @@ $(function(){
     //新しく作ったグループだとメッセージからlast_message_idを取得できないので0を設定しておく
     if (last_message_id == null){
       last_message_id = 0
-    }      
+    }
   }
 
   function buildHTML(message, current_user_ID, message_user_id){
