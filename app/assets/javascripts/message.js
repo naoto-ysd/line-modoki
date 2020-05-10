@@ -1,22 +1,13 @@
 $(function(){
   //カスタムデータ属性を利用し、ログインしているユーザーのIDを取得
   let current_user_ID = $('.header__name').data("current-user");
-  let last_message_id = 0
-  let last_message_id_current = 0
-  let last_message_id_other = 0
 
   function last_message_setter(){
-    //自動更新するときは最新のメッセージをテーブルから取得する
-    //ページ上に表示されている”main__messages__CurrentUser”と
-    //main__messages__OtherUserの最新メッセージを比較して大きい方をlast_message_idとしている。
-    last_message_id_current = $('.main__messages__CurrentUser:last').data("message-id");
-    last_message_id_other = $('.main__messages__OtherUser:last').data("message-id");
 
-    if (last_message_id_current > last_message_id_other){
-      last_message_id = last_message_id_current
-    } else{
-      last_message_id = last_message_id_other
-    }
+    // ページ上に表示されている”main__messages__CurrentUser”と
+    // main__messages__OtherUserに共通して付与しているクラス(common_message)
+    // からカスタムデータ属性のmessage-idをlast_message_idに設定する。
+    last_message_id = $('.common_message:last').data("message-id");
     //新しく作ったグループだとメッセージからlast_message_idを取得できないので0を設定しておく
     if (last_message_id == null){
       last_message_id = 0
@@ -27,10 +18,10 @@ $(function(){
     let html_baloon = ""
     if (message_user_id == current_user_ID) {
       html_baloon = 
-        `<div class="main__messages__CurrentUser" data-message-id=${message.id} >`
+        `<div class="main__messages__CurrentUser common_message" data-message-id=${message.id}>`
     } else {
       html_baloon = 
-        `<div class="main__messages__OtherUser" data-message-id=${message.id} >`
+        `<div class="main__messages__OtherUser common_message" data-message-id=${message.id}>`
     }
     html_baloon = html_baloon + 
       `<div class="upper-message">
@@ -65,9 +56,10 @@ $(function(){
   }
 
   $('#new_message').on('submit', function(e){
+    e.preventDefault();
+
     //最新のメッセージを設定
     last_message_setter()
-    e.preventDefault();
     let formData = new FormData(this);
     let url = $(this).attr('action')
     // messages#createにいく
@@ -117,7 +109,7 @@ $(function(){
           insertHTML += buildHTML(message, current_user_ID, message.user_id)
         });
         $('.main__messages').append(insertHTML);
-        $('.main__messages').animate({ scrollTop: $('.main__messages')[0].scrollHeight});
+        $('.main__messages').animate({scrollTop: $('.main__messages')[0].scrollHeight});
       };
     })
     .fail(function() {

@@ -1,5 +1,5 @@
 - if message.user.id == current_user.id
-  .main__messages__CurrentUser{data: {message: {id: message.id}}}
+  .main__messages__CurrentUser.common_message{data: {message: {id: message.id}}}
     .upper-message
       .upper-message__user-name
         = message.user.name
@@ -12,7 +12,7 @@
       = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
 
 - else
-  .main__messages__OtherUser{data: {message: {id: message.id}}}
+  .main__messages__OtherUser.common_message{data: {message: {id: message.id}}}
     .upper-message
       .upper-message__user-name
         = message.user.name
